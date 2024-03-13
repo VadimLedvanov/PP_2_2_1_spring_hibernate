@@ -5,10 +5,7 @@ import hiber.model.Car;
 import hiber.model.User;
 import hiber.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import java.sql.SQLException;
-import java.util.List;
-import java.util.stream.DoubleStream;
 
 public class MainApp {
    public static void main(String[] args) throws SQLException {
@@ -23,7 +20,12 @@ public class MainApp {
 //      userService.add(new User("User3", "Lastname3", "user3@mail.ru", new Car(111, "audi")));
 //      userService.add(new User("User4", "Lastname4", "user4@mail.ru", new Car(7, "lada")));
 
-      System.out.println(userService.getUserByCar(222, "mercedes").toString());
+      User user = userService.getUserByCar(222, "mercedes");
+      if (user == null) {
+         System.out.println("Пользователя с такой машиной нет в таблице");
+      } else {
+         System.out.println(user);
+      }
 
       context.close();
    }
